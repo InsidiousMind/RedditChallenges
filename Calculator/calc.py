@@ -1,25 +1,35 @@
-import curses
+from functools import reduce
+print("Welcome to Insidious'Fancy Calculator")
+print ("Enter 'q' to quit, '+', '-', '*', '/' are the operations")
 
-
-screen = curses.initscr()
-curses.noecho()
-curses.curs_set(0)
-screen.keypad(1)
-
-screen.addstr("Welcome to the Insidious' Calculator!")
-
-screen.addstr("")
-
-
+def toInt(n): return map(lambda x: int(x), n)
+def add(n): return reduce(lambda x,y: x+y, n)
+def subt(n): return reduce(lambda x,y: x-y, n)
+def mult(n): return reduce(lambda x,y: x*y, n)
+def div(n): return reduce(lambda x,y: x/y, n)
+def groupBy(c,myList):return reduce(lambda acc,x: acc+[[]] if x==c else acc[:-1]+[acc[-1]+[x]], myList,[[]])
+def formNum(nums, char):
+    nums = nums.split(char)
+    nums = toInt(nums)
+    return nums
+#Main Loop
 while True:
-    event = screen.getch()
-    if event == ord("q"): break
-    elif event == curses.KEY_UP:
-        screen.clear()
-        screen.addstr(5, 0, "The User Pressed UP")
-    elif event == curses.KEY_DOWN:
-        screen.addstr(5, 0, "The User Pressed DOWN")
-
-
-curses.endwin()
+    numbers = input()
+    if numbers == "q": break
+    elif "*" and "+" and "-" in numbers:
+        pass
+        
+    elif "*" in numbers:
+        numbers = formNum(numbers, "*")
+        print(mult(numbers))
+    elif "+" in numbers:
+        numbers = formNum(numbers, "+")
+        print(add(numbers))
+    elif "/" in numbers:
+        numbers = formNum(numbers, "/")
+        print(div(numbers))
+    elif "-" in numbers:
+        numbers = formNum(numbers,"-")
+        print(subt(numbers))
+        
 
