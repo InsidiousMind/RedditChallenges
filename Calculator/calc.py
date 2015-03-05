@@ -1,5 +1,7 @@
 from functools import reduce
-print("Welcome to Insidious'Fancy Calculator")
+import re
+
+print("Welcome to Insidious' Fancy Calculator")
 print ("Enter 'q' to quit, '+', '-', '*', '/' are the operations")
 
 def toInt(n): return map(lambda x: int(x), n)
@@ -7,22 +9,25 @@ def add(n): return reduce(lambda x,y: x+y, n)
 def subt(n): return reduce(lambda x,y: x-y, n)
 def mult(n): return reduce(lambda x,y: x*y, n)
 def div(n): return reduce(lambda x,y: x/y, n)
-def groupBy(c,myList):return reduce(lambda acc,x: acc+[[]] if x==c else acc[:-1]+[acc[-1]+[x]], myList,[[]])
+
 def formNum(nums, char):
     nums = nums.split(char)
     nums = toInt(nums)
     return nums
 #Main Loop
 while True:
-    numbers = input()
+    numbers = input()    
     if numbers == "q": break
-    elif "*" and "+" and "-" in numbers:
-        pass
-    elif "*" and "+" in numbers:
-        pass
-    elif "/" and "-" in numbers:
-        pass
-    elif "*" in numbers:
+    s = ["*", "-", "/", "+"]
+    temp = re.split(r'[\d\s]\s*', numbers)
+    count = 0
+    for item in temp:
+        if item in s:
+            count += 1
+            s.remove(item)
+    if count > 1: 
+        print("Can't do that operation, sorry. This Calculator doesn't know PEMDAS")
+    elif "*" in numbers: 
         numbers = formNum(numbers, "*")
         print(mult(numbers))
     elif "+" in numbers:
@@ -34,5 +39,6 @@ while True:
     elif "-" in numbers:
         numbers = formNum(numbers,"-")
         print(subt(numbers))
-        
+    else:
+        print("Probably can't do this operation, X.X")
 
