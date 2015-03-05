@@ -18,7 +18,10 @@ while True:
     if numbers == "q": break
     elif "*" and "+" and "-" in numbers:
         pass
-        
+    elif "*" and "+" in numbers:
+        pass
+    elif "/" and "-" in numbers:
+        pass
     elif "*" in numbers:
         numbers = formNum(numbers, "*")
         print(mult(numbers))
