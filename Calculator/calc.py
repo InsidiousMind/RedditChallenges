@@ -11,7 +11,9 @@ def mult(n): return reduce(lambda x,y: x*y, n)
 def div(n): return reduce(lambda x,y: x/y, n)
 
 def formNum(nums, char):
-    nums = nums.split(char)
+    nums = re.split(r'[+ - * / \s]\s*', nums)
+    for item in nums: item.strip()
+    nums = filter(None, nums)
     nums = toInt(nums)
     return nums
 #Main Loop
@@ -19,14 +21,12 @@ while True:
     numbers = input()    
     if numbers == "q": break
     s = ["*", "-", "/", "+"]
-    temp = re.split(r'[\d\s]\s*', numbers)
     count = 0
-    for item in temp:
+    for item in numbers:
         if item in s:
             count += 1
             s.remove(item)
-    if count > 1: 
-        print("Can't do that operation, sorry. This Calculator doesn't know PEMDAS")
+    if count > 1: print("Can't do that operation, sorry. This Calculator doesn't know PEMDAS")
     elif "*" in numbers: 
         numbers = formNum(numbers, "*")
         print(mult(numbers))
