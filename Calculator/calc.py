@@ -16,8 +16,8 @@ def formNum(nums, char):
     nums = filter(None, nums)
     nums = toInt(nums)
     return nums
-#Main Loop for persistance
-while True:
+#Main Loop for persistance and things
+while True: 
     numbers = input()    
     if numbers == "q": break
     s = ["*", "-", "/", "+"]
